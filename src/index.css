@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 50% 3%;
+    --foreground: 200 60% 94%;
+    --card: 212 45% 9%;
+    --card-foreground: 200 60% 94%;
+    --popover: 212 45% 9%;
+    --popover-foreground: 200 60% 94%;
+    --primary: 177 100% 42%;
+    --primary-foreground: 210 50% 3%;
+    --secondary: 37 90% 55%;
+    --secondary-foreground: 210 50% 3%;
+    --muted: 210 20% 15%;
+    --muted-foreground: 207 18% 59%;
+    --accent: 212 50% 13%;
+    --accent-foreground: 200 60% 94%;
+    --destructive: 0 80% 65%;
+    --destructive-foreground: 200 60% 94%;
+    --success: 145 63% 49%;
+    --success-foreground: 210 50% 3%;
+    --border: 210 40% 14%;
+    --input: 210 40% 14%;
+    --ring: 177 100% 42%;
+    --radius: 0.5rem;
+    --sidebar-background: 212 45% 9%;
+    --sidebar-foreground: 200 60% 94%;
+    --sidebar-primary: 177 100% 42%;
+    --sidebar-primary-foreground: 210 50% 3%;
+    --sidebar-accent: 212 50% 13%;
+    --sidebar-accent-foreground: 200 60% 94%;
+    --sidebar-border: 210 40% 14%;
+    --sidebar-ring: 177 100% 42%;
+    --card-border: 210 45% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+/* Scanline overlay */
+.scanline-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 212, 200, 0.015) 2px,
+    rgba(0, 212, 200, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glow effects */
+.glow-teal {
+  box-shadow: 0 0 20px rgba(0, 212, 200, 0.3), 0 0 40px rgba(0, 212, 200, 0.1);
+}
+.glow-teal-sm {
+  box-shadow: 0 0 8px rgba(0, 212, 200, 0.2);
+}
+.glow-green {
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.4), 0 0 40px rgba(46, 204, 113, 0.15);
+}
+.glow-red {
+  box-shadow: 0 0 20px rgba(255, 76, 76, 0.4), 0 0 40px rgba(255, 76, 76, 0.15);
+}
+.glow-amber {
+  box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(11, 22, 35, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(13, 33, 55, 0.8);
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  border-color: rgba(0, 212, 200, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 212, 200, 0.08);
+}
+
+/* Input glow */
+.input-stellar:focus {
+  box-shadow: 0 0 0 2px rgba(0, 212, 200, 0.5), 0 0 12px rgba(0, 212, 200, 0.3);
+  border-color: hsl(177, 100%, 42%);
+}
+.input-stellar.input-error {
+  box-shadow: 0 0 0 2px rgba(255, 76, 76, 0.5), 0 0 12px rgba(255, 76, 76, 0.2);
+  border-color: hsl(0, 80%, 65%);
+}
+
+/* Pulsing button */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 200, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(0, 212, 200, 0.6), 0 0 60px rgba(0, 212, 200, 0.2); }
+}
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Planet rotation */
+@keyframes planet-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes planet-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Typing cursor */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typing-cursor::after {
+  content: '▌';
+  animation: blink-cursor 0.8s infinite;
+  color: hsl(177, 100%, 42%);
+}
+
+/* Orbiting dots spinner */
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(210, 50%, 3%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(210, 40%, 14%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(177, 100%, 42%);
+}
