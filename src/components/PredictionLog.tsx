@@ -69,8 +69,8 @@ const PredictionLog = ({ refreshTrigger }: PredictionLogProps) => {
               key={`page-${p}`}
               onClick={() => handlePageChange(p as number)}
               className={`px-3 py-1.5 rounded-md border transition-colors ${page === p
-                  ? "border-primary text-primary bg-primary/10"
-                  : "border-border text-muted-foreground hover:bg-accent hover:text-foreground"
+                ? "border-primary text-primary bg-primary/10"
+                : "border-border text-muted-foreground hover:bg-accent hover:text-foreground"
                 }`}
             >
               {p}
@@ -135,7 +135,9 @@ const PredictionLog = ({ refreshTrigger }: PredictionLogProps) => {
                     <tbody className={isLoading ? "opacity-50" : ""}>
                       {data.data.map((entry, i) => {
                         // Attempt to parse the JS format datetime from Postgres, otherwise fallback
-                        const parsedDate = new Date(entry.timestamp).toLocaleString();
+                        // Append 'Z' to naive UTC strings from backend so the browser knows it's UTC
+                        const utcTimestamp = entry.timestamp ? (entry.timestamp.endsWith('Z') ? entry.timestamp : `${entry.timestamp}Z`) : '';
+                        const parsedDate = new Date(utcTimestamp).toLocaleString();
                         const displayDate = parsedDate !== "Invalid Date" ? parsedDate : entry.timestamp;
 
                         return (
